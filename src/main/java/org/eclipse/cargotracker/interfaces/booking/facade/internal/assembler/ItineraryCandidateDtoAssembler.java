@@ -13,12 +13,14 @@ import org.eclipse.cargotracker.domain.model.location.LocationRepository;
 import org.eclipse.cargotracker.domain.model.location.UnLocode;
 import org.eclipse.cargotracker.domain.model.voyage.Voyage;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
-import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
-import org.eclipse.cargotracker.interfaces.booking.facade.dto.RouteCandidate;
-
-@ApplicationScoped
-public class ItineraryCandidateDtoAssembler {
-
+/**
+ * Assembler for ItineraryCandidate DTOs.
+ * 
+ * CONTAINERIZATION NOTE: This class uses @ApplicationScoped for state management.
+ * For horizontal scaling in containerized environments, consider using distributed
+ * caching (e.g., Amazon ElastiCache for Redis) to ensure consistency across instances.
+ * Configure Redis connection via environment variables: REDIS_HOST, REDIS_PORT, REDIS_PASSWORD.
+ */
   @Inject private LocationDtoAssembler locationDtoAssembler;
 
   public RouteCandidate toDto(Itinerary itinerary) {

@@ -7,6 +7,14 @@ import java.util.List;
 import java.util.Random;
 import jakarta.enterprise.context.ApplicationScoped;
 
+/**
+ * Data access object for graph traversal.
+ * 
+ * CONTAINERIZATION NOTE: This class uses @ApplicationScoped for state management.
+ * For horizontal scaling in containerized environments, consider using distributed
+ * caching (e.g., Amazon ElastiCache for Redis) to ensure consistency across instances.
+ * Configure Redis connection via environment variables: REDIS_HOST, REDIS_PORT, REDIS_PASSWORD.
+ */
 @ApplicationScoped
 public class GraphDao implements Serializable {
 

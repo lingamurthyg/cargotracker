@@ -27,6 +27,14 @@ import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.Car
 import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.ItineraryCandidateDtoAssembler;
 import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.LocationDtoAssembler;
 
+/**
+ * Default implementation of BookingServiceFacade.
+ * 
+ * CONTAINERIZATION NOTE: This class uses @ApplicationScoped for state management.
+ * For horizontal scaling in containerized environments, consider using distributed
+ * caching (e.g., Amazon ElastiCache for Redis) to ensure consistency across instances.
+ * Configure Redis connection via environment variables: REDIS_HOST, REDIS_PORT, REDIS_PASSWORD.
+ */
 @ApplicationScoped
 public class DefaultBookingServiceFacade implements BookingServiceFacade, Serializable {
 

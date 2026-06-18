@@ -14,7 +14,14 @@ import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.location.SampleLocations;
 import org.eclipse.cargotracker.domain.model.voyage.SampleVoyages;
 
-/** Loads sample data for demo. */
+/**
+ * Loads sample data for demo.
+ * 
+ * CONTAINERIZATION NOTE: This class uses @Singleton for state management.
+ * For horizontal scaling in containerized environments, consider using distributed
+ * caching (e.g., Amazon ElastiCache for Redis) to ensure consistency across instances.
+ * Configure Redis connection via environment variables: REDIS_HOST, REDIS_PORT, REDIS_PASSWORD.
+ */
 @Singleton
 @Startup
 public class BookingServiceTestDataGenerator {

@@ -13,11 +13,20 @@ import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.interfaces.handling.HandlingEventRegistrationAttempt;
 
+/**
+ * JMS-based implementation of ApplicationEvents.
+ * 
+ * CONTAINERIZATION NOTE: This class uses @ApplicationScoped for state management.
+ * For horizontal scaling in containerized environments, consider using distributed
+ * caching (e.g., Amazon ElastiCache for Redis) to ensure consistency across instances.
+ * Configure Redis connection via environment variables: REDIS_HOST, REDIS_PORT, REDIS_PASSWORD.
+ */
 @ApplicationScoped
 public class JmsApplicationEvents implements ApplicationEvents, Serializable {
 
   private static final long serialVersionUID = 1L;
   private static final int LOW_PRIORITY = 0;
+  
   @Inject JMSContext jmsContext;
 
   @Resource(lookup = "java:app/jms/CargoHandledQueue")

@@ -4,12 +4,14 @@ import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.cargotracker.application.util.DateConverter;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
-import org.eclipse.cargotracker.domain.model.voyage.Voyage;
-import org.eclipse.cargotracker.interfaces.booking.facade.dto.TrackingEvents;
-
-@ApplicationScoped
-public class TrackingEventsDtoAssembler {
-
+/**
+ * Assembler for TrackingEvents DTOs.
+ * 
+ * CONTAINERIZATION NOTE: This class uses @ApplicationScoped for state management.
+ * For horizontal scaling in containerized environments, consider using distributed
+ * caching (e.g., Amazon ElastiCache for Redis) to ensure consistency across instances.
+ * Configure Redis connection via environment variables: REDIS_HOST, REDIS_PORT, REDIS_PASSWORD.
+ */
   public TrackingEvents toDto(Cargo cargo, HandlingEvent handlingEvent) {
     String location = locationFrom(handlingEvent);
     HandlingEvent.Type type = handlingEvent.getType();

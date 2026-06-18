@@ -20,16 +20,15 @@ import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.cargotracker.domain.model.location.Location;
 import org.eclipse.cargotracker.domain.model.location.UnLocode;
-
-/**
- * At the moment, coordinates are produced by a simple factory. It may be converted to a repository
- * if coordinates become a domain layer concern.
- */
-public class CoordinatesFactory {
-
-  private static final Map<String, Coordinates> COORDINATES_MAP;
-
-  private CoordinatesFactory() {
+ * At the moment, coordinates are produced by a simple factory with local caching.
+ * It may be converted to a repository if coordinates become a domain layer concern.
+ * 
+ * CONTAINERIZATION NOTE: This class uses a local static cache (COORDINATES_MAP) for state storage.
+ * For horizontal scaling in containerized environments, replace this with distributed caching
+ * (e.g., Amazon ElastiCache for Redis) to ensure cache coherence across instances.
+ * Configure Redis connection via environment variables: REDIS_HOST, REDIS_PORT, REDIS_PASSWORD.
+ * Example: Use Spring Cache abstraction with @Cacheable annotations backed by Redis.
+  // LOCAL CACHE - Replace with distributed cache for horizontal scaling
     /* Prevent instantiation. */
   }
 

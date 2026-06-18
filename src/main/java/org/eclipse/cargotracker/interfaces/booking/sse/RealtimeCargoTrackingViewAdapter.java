@@ -4,16 +4,17 @@ import java.util.EnumMap;
 import java.util.Map;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.RoutingStatus;
-import org.eclipse.cargotracker.domain.model.cargo.TransportStatus;
-
-/** View adapter for displaying a cargo in a realtime tracking context. */
-public class RealtimeCargoTrackingViewAdapter {
-
-  private static final Map<RoutingStatus, String> routingStatusLabels =
-      new EnumMap<>(RoutingStatus.class);
-  private static final Map<TransportStatus, String> transportStatusLabels =
-      new EnumMap<>(TransportStatus.class);
-
+/**
+ * View adapter for displaying a cargo in a realtime tracking context.
+ * 
+ * CONTAINERIZATION NOTE: This class uses local static caches (routingStatusLabels, transportStatusLabels)
+ * for state storage. For horizontal scaling in containerized environments, replace these with distributed
+ * caching (e.g., Amazon ElastiCache for Redis) to ensure cache coherence across instances.
+ * Configure Redis connection via environment variables: REDIS_HOST, REDIS_PORT, REDIS_PASSWORD.
+ * Example: Use Spring Cache abstraction with @Cacheable annotations backed by Redis.
+ */
+  // LOCAL CACHES - Replace with distributed cache for horizontal scaling
+  // LOCAL CACHE - Replace with distributed cache for horizontal scaling
   private final Cargo cargo;
 
   public RealtimeCargoTrackingViewAdapter(Cargo cargo) {

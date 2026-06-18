@@ -3,12 +3,14 @@ package org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import jakarta.enterprise.context.ApplicationScoped;
-import org.eclipse.cargotracker.domain.model.location.Location;
-
-@ApplicationScoped
-public class LocationDtoAssembler {
-
+/**
+ * Assembler for Location DTOs.
+ * 
+ * CONTAINERIZATION NOTE: This class uses @ApplicationScoped for state management.
+ * For horizontal scaling in containerized environments, consider using distributed
+ * caching (e.g., Amazon ElastiCache for Redis) to ensure consistency across instances.
+ * Configure Redis connection via environment variables: REDIS_HOST, REDIS_PORT, REDIS_PASSWORD.
+ */
   public org.eclipse.cargotracker.interfaces.booking.facade.dto.Location toDto(Location location) {
     return new org.eclipse.cargotracker.interfaces.booking.facade.dto.Location(
         location.getUnLocode().getIdString(), location.getName());

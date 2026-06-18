@@ -13,12 +13,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.json.bind.JsonbBuilder;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
-import org.eclipse.cargotracker.domain.model.cargo.CargoRepository;
-import org.eclipse.cargotracker.domain.model.cargo.TrackingId;
-import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
-import org.eclipse.cargotracker.domain.model.handling.HandlingEventRepository;
-
-/**
+import org.eclipse.cargotracker.interfaces.CoordinatesFactory;
  * Backing bean for tracking cargo. This interface sits immediately on top of the domain layer,
  * unlike the booking interface which has a facade and supporting DTOs in between.
  *
@@ -35,12 +30,8 @@ public class Track implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  @Inject private transient Logger logger;
+  @Inject private CoordinatesFactory coordinatesFactory;
 
-  @Inject private CargoRepository cargoRepository;
-  @Inject private HandlingEventRepository handlingEventRepository;
-
-  private String trackingId;
   private CargoTrackingViewAdapter cargo;
 
   public String getTrackingId() {
@@ -69,13 +60,7 @@ public class Track implements Serializable {
   }
 
   public void onTrackById() {
-    Cargo cargo = cargoRepository.find(new TrackingId(trackingId));
-
-    if (cargo != null) {
-      List<HandlingEvent> handlingEvents =
-          handlingEventRepository
-              .lookupHandlingHistoryOfCargo(new TrackingId(trackingId))
-              .getDistinctEventsByCompletionTime();
+      this.cargo = new CargoTrackingViewAdapter(cargo, handlingEvents, coordinatesFactory);
       this.cargo = new CargoTrackingViewAdapter(cargo, handlingEvents);
     } else {
       this.cargo = null;

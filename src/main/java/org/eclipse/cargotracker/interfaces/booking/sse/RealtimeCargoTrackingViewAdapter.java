@@ -1,20 +1,29 @@
-package org.eclipse.cargotracker.interfaces.booking.sse;
-
-import java.util.EnumMap;
-import java.util.Map;
-import org.eclipse.cargotracker.domain.model.cargo.Cargo;
-import org.eclipse.cargotracker.domain.model.cargo.RoutingStatus;
-import org.eclipse.cargotracker.domain.model.cargo.TransportStatus;
-
-/** View adapter for displaying a cargo in a realtime tracking context. */
-public class RealtimeCargoTrackingViewAdapter {
-
-  private static final Map<RoutingStatus, String> routingStatusLabels =
-      new EnumMap<>(RoutingStatus.class);
-  private static final Map<TransportStatus, String> transportStatusLabels =
-      new EnumMap<>(TransportStatus.class);
-
-  private final Cargo cargo;
+import java.util.HashMap;
+import org.eclipse.cargotracker.interfaces.CoordinatesFactory;
+/** 
+ * View adapter for displaying a cargo in a realtime tracking context.
+ * Migrated from static EnumMap to instance-based HashMap for better containerization support.
+ * In production, consider using a distributed cache for label mappings.
+ */
+  // Using instance variables instead of static for better containerization
+  private final HashMap<RoutingStatus, String> routingStatusLabels;
+  private final HashMap<TransportStatus, String> transportStatusLabels;
+  private final CoordinatesFactory coordinatesFactory;
+  public RealtimeCargoTrackingViewAdapter(Cargo cargo, CoordinatesFactory coordinatesFactory) {
+    this.coordinatesFactory = coordinatesFactory;
+    
+    // Initialize label maps
+    this.routingStatusLabels = new HashMap<>();
+    routingStatusLabels.put(RoutingStatus.NOT_ROUTED, "Not routed");
+    routingStatusLabels.put(RoutingStatus.ROUTED, "Routed");
+    routingStatusLabels.put(RoutingStatus.MISROUTED, "Misrouted");
+    
+    this.transportStatusLabels = new HashMap<>();
+    transportStatusLabels.put(TransportStatus.NOT_RECEIVED, "Not received");
+    transportStatusLabels.put(TransportStatus.IN_PORT, "In port");
+    transportStatusLabels.put(TransportStatus.ONBOARD_CARRIER, "Onboard carrier");
+    transportStatusLabels.put(TransportStatus.CLAIMED, "Claimed");
+    transportStatusLabels.put(TransportStatus.UNKNOWN, "Unknown");
 
   public RealtimeCargoTrackingViewAdapter(Cargo cargo) {
     this.cargo = cargo;
@@ -40,17 +49,8 @@ public class RealtimeCargoTrackingViewAdapter {
     return cargo.getDelivery().isUnloadedAtDestination();
   }
 
-  public LocationViewAdapter getOrigin() {
-    return new LocationViewAdapter(cargo.getOrigin());
-  }
-
-  public LocationViewAdapter getLastKnownLocation() {
-    return new LocationViewAdapter(cargo.getDelivery().getLastKnownLocation());
-  }
-
-  public LocationViewAdapter getLocation() {
-    return cargo.getDelivery().getTransportStatus() == TransportStatus.NOT_RECEIVED
-        ? getOrigin()
+    return new LocationViewAdapter(cargo.getOrigin(), coordinatesFactory);
+    return new LocationViewAdapter(cargo.getDelivery().getLastKnownLocation(), coordinatesFactory);
         : getLastKnownLocation();
   }
 
@@ -67,20 +67,4 @@ public class RealtimeCargoTrackingViewAdapter {
 
     if (cargo.getDelivery().isUnloadedAtDestination()) {
       return "AT_DESTINATION";
-    }
-
-    return cargo.getDelivery().getTransportStatus().toString();
-  }
-
-  static {
-    routingStatusLabels.put(RoutingStatus.NOT_ROUTED, "Not routed");
-    routingStatusLabels.put(RoutingStatus.ROUTED, "Routed");
-    routingStatusLabels.put(RoutingStatus.MISROUTED, "Misrouted");
-
-    transportStatusLabels.put(TransportStatus.NOT_RECEIVED, "Not received");
-    transportStatusLabels.put(TransportStatus.IN_PORT, "In port");
-    transportStatusLabels.put(TransportStatus.ONBOARD_CARRIER, "Onboard carrier");
-    transportStatusLabels.put(TransportStatus.CLAIMED, "Claimed");
-    transportStatusLabels.put(TransportStatus.UNKNOWN, "Unknown");
-  }
 }

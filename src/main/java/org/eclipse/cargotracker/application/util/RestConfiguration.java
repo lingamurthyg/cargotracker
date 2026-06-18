@@ -1,19 +1,16 @@
-package org.eclipse.cargotracker.application.util;
-
-import java.util.HashMap;
-import java.util.Map;
-import jakarta.ws.rs.ApplicationPath;
-import jakarta.ws.rs.core.Application;
-import org.glassfish.jersey.server.ServerProperties;
-
-/** Jakarta REST configuration. */
-@ApplicationPath("rest")
-public class RestConfiguration extends Application {
-
-  @Override
-  public Map<String, Object> getProperties() {
-    Map<String, Object> properties = new HashMap<String, Object>();
-    properties.put(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
-    return properties;
+/**
+ * Jakarta REST configuration.
+ * Migrated from GlassFish-specific configuration to standard Jakarta EE REST configuration
+ * for better containerization compatibility.
+ */
+  // Using default configuration for Jakarta REST
+  // Bean Validation is enabled by default in Jakarta EE 10+
+  // No GlassFish-specific properties needed for containerization
+  
+  // If custom configuration is needed, it should be done through:
+  // - Environment variables
+  // - External configuration files
+  // - Standard Jakarta EE mechanisms
+  // This ensures the application works across different container runtimes
   }
 }

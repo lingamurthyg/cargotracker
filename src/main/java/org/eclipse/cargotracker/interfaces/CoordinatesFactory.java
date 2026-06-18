@@ -13,24 +13,42 @@ import static org.eclipse.cargotracker.domain.model.location.SampleLocations.NEW
 import static org.eclipse.cargotracker.domain.model.location.SampleLocations.ROTTERDAM;
 import static org.eclipse.cargotracker.domain.model.location.SampleLocations.SHANGHAI;
 import static org.eclipse.cargotracker.domain.model.location.SampleLocations.STOCKHOLM;
-import static org.eclipse.cargotracker.domain.model.location.SampleLocations.TOKYO;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import org.eclipse.cargotracker.domain.model.location.Location;
-import org.eclipse.cargotracker.domain.model.location.UnLocode;
-
-/**
- * At the moment, coordinates are produced by a simple factory. It may be converted to a repository
- * if coordinates become a domain layer concern.
- */
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.annotation.PostConstruct;
+ * 
+ * Migrated from static initialization to instance-based initialization for better
+ * containerization support. In production, this should be replaced with a distributed
+ * cache like Redis or a database lookup.
+@ApplicationScoped
 public class CoordinatesFactory {
+  private Map<String, Coordinates> coordinatesMap;
+  @PostConstruct
+  public void init() {
+    Map<String, Coordinates> map = new HashMap<>();
 
-  private static final Map<String, Coordinates> COORDINATES_MAP;
+    // TODO: Replace with distributed cache (Redis) or database lookup for production
+    map.put(HONGKONG.getUnLocode().getIdString(), new Coordinates(22, 114));
+    map.put(MELBOURNE.getUnLocode().getIdString(), new Coordinates(-38, 145));
+    map.put(STOCKHOLM.getUnLocode().getIdString(), new Coordinates(59, 18));
+    map.put(HELSINKI.getUnLocode().getIdString(), new Coordinates(60, 25));
+    map.put(CHICAGO.getUnLocode().getIdString(), new Coordinates(42, -88));
+    map.put(TOKYO.getUnLocode().getIdString(), new Coordinates(36, 140));
+    map.put(HAMBURG.getUnLocode().getIdString(), new Coordinates(54, 10));
+    map.put(SHANGHAI.getUnLocode().getIdString(), new Coordinates(31, 121));
+    map.put(ROTTERDAM.getUnLocode().getIdString(), new Coordinates(52, 5));
+    map.put(GOTHENBURG.getUnLocode().getIdString(), new Coordinates(58, 12));
+    map.put(HANGZOU.getUnLocode().getIdString(), new Coordinates(30, 120));
+    map.put(NEWYORK.getUnLocode().getIdString(), new Coordinates(41, -74));
+    map.put(DALLAS.getUnLocode().getIdString(), new Coordinates(33, -97));
+    map.put(UNKNOWN.getUnLocode().getIdString(), new Coordinates(-90, 0));
 
-  private CoordinatesFactory() {
-    /* Prevent instantiation. */
+    coordinatesMap = Collections.unmodifiableMap(map);
+  }
+
+  public Coordinates find(Location location) {
+  public Coordinates find(UnLocode unLocode) {
+  public Coordinates find(String unLocode) {
+    return coordinatesMap.get(unLocode);
   }
 
   public static Coordinates find(Location location) {

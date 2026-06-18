@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cargo-tracker
+  namespace: cargo-tracker
+  labels:
+    app: cargo-tracker
+    version: v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cargo-tracker
+  template:
+    metadata:
+      labels:
+        app: cargo-tracker
+        version: v1
+    spec:
+      containers:
+      - name: cargo-tracker
+        image: {{IMAGE_URI}}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        env:
+        - name: JAVA_OPTS
+          value: "-Xmx512m -Xms256m -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
+        - name: TZ
+          value: "UTC"
+        - name: GRAPH_TRAVERSAL_URL
+          value: "http://localhost:8080/cargo-tracker/rest/graph-traversal/shortest-path"
+        - name: DB_DRIVER_CLASS
+          value: "org.h2.jdbcx.JdbcDataSource"
+        - name: DB_JDBC_URL
+          value: "jdbc:h2:file:/app/data/cargo-tracker-database"
+        - name: DB_USER
+          value: ""
+        - name: DB_PASSWORD
+          value: ""
+        # Uncomment and configure for external PostgreSQL database
+        # - name: DB_DRIVER_CLASS
+        #   value: "org.postgresql.ds.PGPoolingDataSource"
+        # - name: DB_JDBC_URL
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: cargo-tracker-db-secret
+        #       key: jdbc-url
+        # - name: DB_USER
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: cargo-tracker-db-secret
+        #       key: username
+        # - name: DB_PASSWORD
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: cargo-tracker-db-secret
+        #       key: password
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
+        livenessProbe:
+          httpGet:
+            path: /cargo-tracker/rest/health/live
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /cargo-tracker/rest/health/ready
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        volumeMounts:
+        - name: data
+          mountPath: /app/data
+      volumes:
+      - name: data
+        emptyDir: {}
+      # For persistent storage, use PersistentVolumeClaim instead:
+      # - name: data
+      #   persistentVolumeClaim:
+      #     claimName: cargo-tracker-data-pvc
+      restartPolicy: Always

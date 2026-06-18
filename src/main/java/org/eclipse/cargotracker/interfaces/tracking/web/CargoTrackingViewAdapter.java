@@ -9,17 +9,13 @@ import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.Delivery;
 import org.eclipse.cargotracker.domain.model.cargo.HandlingActivity;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
-import org.eclipse.cargotracker.interfaces.Coordinates;
-import org.eclipse.cargotracker.interfaces.CoordinatesFactory;
-
-/** View adapter for displaying a cargo in a tracking context. */
-public class CargoTrackingViewAdapter {
-
-  private final Cargo cargo;
-  private final List<HandlingEventViewAdapter> events;
-
-  public CargoTrackingViewAdapter(Cargo cargo, List<HandlingEvent> handlingEvents) {
-    this.cargo = cargo;
+/** 
+ * View adapter for displaying a cargo in a tracking context.
+ * Updated to support dependency injection for containerization.
+ */
+  private final CoordinatesFactory coordinatesFactory;
+  public CargoTrackingViewAdapter(Cargo cargo, List<HandlingEvent> handlingEvents, CoordinatesFactory coordinatesFactory) {
+    this.coordinatesFactory = coordinatesFactory;
     this.events = new ArrayList<>(handlingEvents.size());
 
     handlingEvents.stream().map(HandlingEventViewAdapter::new).forEach(events::add);
@@ -37,25 +33,13 @@ public class CargoTrackingViewAdapter {
     return cargo.getRouteSpecification().getOrigin().getUnLocode().getIdString();
   }
 
-  public Coordinates getOriginCoordinates() {
-    return CoordinatesFactory.find(cargo.getRouteSpecification().getOrigin());
-  }
-
-  public String getDestinationName() {
-    return cargo.getRouteSpecification().getDestination().getName();
-  }
+    return coordinatesFactory != null ? coordinatesFactory.find(cargo.getRouteSpecification().getOrigin()) : null;
 
   public String getDestinationCode() {
     return cargo.getRouteSpecification().getDestination().getUnLocode().getIdString();
   }
 
-  public Coordinates getDestinationCoordinates() {
-    return CoordinatesFactory.find(cargo.getRouteSpecification().getDestination());
-  }
-
-  public String getLastKnownLocationName() {
-    return cargo.getDelivery().getLastKnownLocation().getUnLocode().getIdString().equals("XXXXX")
-        ? "Unknown"
+    return coordinatesFactory != null ? coordinatesFactory.find(cargo.getRouteSpecification().getDestination()) : null;
         : cargo.getDelivery().getLastKnownLocation().getName();
   }
 
@@ -63,13 +47,7 @@ public class CargoTrackingViewAdapter {
     return cargo.getDelivery().getLastKnownLocation().getUnLocode().getIdString();
   }
 
-  public Coordinates getLastKnownLocationCoordinates() {
-    return CoordinatesFactory.find(cargo.getDelivery().getLastKnownLocation());
-  }
-
-  public String getStatusCode() {
-    if (cargo.getItinerary().getLegs().isEmpty()) {
-      return "NOT_ROUTED";
+    return coordinatesFactory != null ? coordinatesFactory.find(cargo.getDelivery().getLastKnownLocation()) : null;
     }
 
     if (cargo.getDelivery().isUnloadedAtDestination()) {

@@ -143,11 +143,11 @@
       </activation>
       <properties>
         <!-- Application properties -->
-        <webapp.graphTraversalUrl>http://localhost:8080/cargo-tracker/rest/graph-traversal/shortest-path</webapp.graphTraversalUrl>
+        <webapp.graphTraversalUrl>${env.GRAPH_TRAVERSAL_URL}</webapp.graphTraversalUrl>
         <db.driverClass>org.h2.jdbcx.JdbcDataSource</db.driverClass>
         <!-- H2 file engine requires an absolute path, e.g., ~/name, ./name or a full-qualified
         path name (it should include driver name under Windows). -->
-        <db.jdbcUrl>jdbc:h2:file:./cargo-tracker-data/cargo-tracker-database</db.jdbcUrl>
+        <db.jdbcUrl>${env.DB_URL}</db.jdbcUrl>
         <db.user/>
         <db.password/>
       </properties>
@@ -206,11 +206,11 @@
       <properties>
         <glassfish.version>7.0.22</glassfish.version>
         <!-- Application properties -->
-        <webapp.graphTraversalUrl>http://localhost:8080/cargo-tracker/rest/graph-traversal/shortest-path</webapp.graphTraversalUrl>
+        <webapp.graphTraversalUrl>${env.GRAPH_TRAVERSAL_URL}</webapp.graphTraversalUrl>
         <db.driverClass>org.h2.jdbcx.JdbcDataSource</db.driverClass>
         <!-- H2 file engine requires an absolute path, e.g., ~/name, ./name or a full-qualified
         path name (it should include driver name under Windows). -->
-        <db.jdbcUrl>jdbc:h2:file:./cargo-tracker-data/cargo-tracker-database</db.jdbcUrl>
+        <db.jdbcUrl>${env.DB_URL}</db.jdbcUrl>
         <db.user/>
         <db.password/>
       </properties>
@@ -325,7 +325,7 @@
         <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
-        <webapp.graphTraversalUrl>http://localhost:8080/rest/graph-traversal/shortest-path</webapp.graphTraversalUrl>
+        <webapp.graphTraversalUrl>${env.GRAPH_TRAVERSAL_URL}</webapp.graphTraversalUrl>
         <db.driverClass>org.postgresql.ds.PGPoolingDataSource</db.driverClass>
         <!-- Pass in via command line. For example:
              ./mvnw clean package -Pcloud 
@@ -405,7 +405,7 @@
       <properties>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <db.driverClass>org.hsqldb.jdbc.JDBCDriver</db.driverClass>
-        <db.jdbcUrl>jdbc:hsqldb:file:./cargo-tracker-data/cargo-tracker-database;create=true</db.jdbcUrl>
+        <db.jdbcUrl>${env.DB_URL}</db.jdbcUrl>
       </properties>
       <dependencies>
         <!-- Provided dependencies -->

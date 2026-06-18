@@ -1,0 +1,70 @@
+# Build outputs
+target/
+build/
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven wrapper (excluded - use system mvn)
+mvnw
+mvnw.cmd
+.mvn/
+
+# Gradle wrapper (excluded - use system gradle)
+gradlew
+gradlew.bat
+gradle/wrapper/
+
+# IDE files
+.idea/
+.vscode/
+.settings/
+.project
+.classpath
+*.iml
+*.iws
+*.ipr
+
+# Version control
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+DOCS/
+docs/
+
+# Test files
+test-output/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Docker files
+docker-compose*.yml
+*.dockerfile
+Dockerfile.*
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+Jenkinsfile
+
+# Dependencies
+node_modules/
+.npm/
+
+# Database files
+*.db
+*.sqlite
+*.h2.db

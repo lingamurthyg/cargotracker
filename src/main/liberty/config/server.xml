@@ -30,13 +30,15 @@
   />
   -->
 
-  <variable defaultValue="8080" name="default.http.port"/>
-  <variable defaultValue="8081" name="default.https.port"/>
+  <variable defaultValue="${HTTP_PORT:8080}" name="default.http.port"/>
+  <variable defaultValue="${HTTPS_PORT:8081}" name="default.https.port"/>
 
   <httpEndpoint host="*" httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"/>
-  <wasJmsEndpoint host="*" id="InboundJmsCommsEndpoint" wasJmsPort="7276" wasJmsSSLPort="9100"/> 
+  <wasJmsEndpoint host="*" id="InboundJmsCommsEndpoint" wasJmsPort="${JMS_PORT:7276}" wasJmsSSLPort="${JMS_SSL_PORT:9100}"/> 
 
-  <quickStartSecurity userName="usr" userPassword="pwd"/>
+  <basicRegistry id="basic" realm="BasicRealm">
+    <user name="${ADMIN_USER}" password="${ADMIN_PASSWORD}"/>
+  </basicRegistry>
 
   <authorization-roles id="com.ibm.ws.batch">
     <security-role name="batchAdmin">
@@ -105,7 +107,7 @@
 
   <dataSource id="cargoTrackerDataStore" jndiName="jdbc/CargoTrackerDatabase">
     <jdbcDriver libraryRef="dbLib"/>
-    <properties URL="jdbc:hsqldb:mem:CargoTrackerDB" password="pwd" user="usr"/>
+    <properties URL="${DB_URL}" password="${DB_PASSWORD}" user="${DB_USER}"/>
   </dataSource>
 
   <databaseStore id="EJBPersistentTimerStore" keyGenerationStrategy="SEQUENCE" tablePrefix="WLP2_"/>
@@ -114,7 +116,7 @@
 
   <databaseStore id="ejbTimerDataStore" keyGenerationStrategy="SEQUENCE"/>
   <dataSource id="DefaultDataSource" jdbcDriverRef="dbDriver">
-        <properties URL="jdbc:hsqldb:mem:EJBTimerDS" password="pwd" user="usr"/>
+        <properties URL="${TIMER_DB_URL}" password="${TIMER_DB_PASSWORD}" user="${TIMER_DB_USER}"/>
   </dataSource>
 
   <ejbContainer>
@@ -125,7 +127,7 @@
   <webApplication contextRoot="cargo-tracker" location="cargo-tracker.war">
     <classloader commonLibraryRef="dbLib"/>
     <web-bnd moduleName="cargo-tracker">
-      <env-entry name="java:app/configuration/GraphTraversalUrl" value="http://localhost:8080/cargo-tracker/rest/graph-traversal/shortest-path"/>
+      <env-entry name="java:app/configuration/GraphTraversalUrl" value="${GRAPH_TRAVERSAL_URL}"/>
     </web-bnd>
     <application-bnd>
       <security-role name="batchAdmin">

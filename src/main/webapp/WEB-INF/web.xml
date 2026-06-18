@@ -5,7 +5,7 @@
   <!-- Overriding system level defaults is a decent usage of XML. -->
   <context-param>
     <param-name>jakarta.faces.PROJECT_STAGE</param-name>
-    <param-value>Development</param-value>
+    <param-value>${PROJECT_STAGE:Production}</param-value>
   </context-param>
   <context-param>
     <param-name>jakarta.faces.CLIENT_WINDOW_MODE</param-name>

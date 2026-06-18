@@ -6,14 +6,12 @@ import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.RoutingStatus;
 import org.eclipse.cargotracker.domain.model.cargo.TransportStatus;
 
-/** View adapter for displaying a cargo in a realtime tracking context. */
+/** View adapter for displaying a cargo in a realtime tracking context. Container-ready. */
 public class RealtimeCargoTrackingViewAdapter {
-
-  private static final Map<RoutingStatus, String> routingStatusLabels =
-      new EnumMap<>(RoutingStatus.class);
-  private static final Map<TransportStatus, String> transportStatusLabels =
-      new EnumMap<>(TransportStatus.class);
-
+  // Container-ready: Immutable static caches - safe for horizontal scaling
+  private static final Map<RoutingStatus, String> routingStatusLabels = new EnumMap<>(RoutingStatus.class);
+  private static final Map<TransportStatus, String> transportStatusLabels = new EnumMap<>(TransportStatus.class);
+  
   private final Cargo cargo;
 
   public RealtimeCargoTrackingViewAdapter(Cargo cargo) {

@@ -13,9 +13,9 @@ import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.CargoStatus;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.TrackingEvents;
 
+// Container-ready: ApplicationScoped assembler is stateless and safe for horizontal scaling
 @ApplicationScoped
 public class CargoStatusDtoAssembler {
-
   @Inject private TrackingEventsDtoAssembler assembler;
 
   public CargoStatus toDto(Cargo cargo, List<HandlingEvent> handlingEvents) {

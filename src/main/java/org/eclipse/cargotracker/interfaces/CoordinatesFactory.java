@@ -22,16 +22,13 @@ import org.eclipse.cargotracker.domain.model.location.Location;
 import org.eclipse.cargotracker.domain.model.location.UnLocode;
 
 /**
- * At the moment, coordinates are produced by a simple factory. It may be converted to a repository
- * if coordinates become a domain layer concern.
+ * Container-ready: Coordinates factory with immutable static cache.
+ * Static map is read-only and safe for horizontal scaling.
+ * For production, consider externalizing to distributed cache or database.
  */
 public class CoordinatesFactory {
-
+  // Container-ready: Immutable static cache - safe for horizontal scaling
   private static final Map<String, Coordinates> COORDINATES_MAP;
-
-  private CoordinatesFactory() {
-    /* Prevent instantiation. */
-  }
 
   public static Coordinates find(Location location) {
     return find(location.getUnLocode());

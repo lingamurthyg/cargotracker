@@ -27,9 +27,9 @@ import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.Car
 import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.ItineraryCandidateDtoAssembler;
 import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.LocationDtoAssembler;
 
+// Container-ready: ApplicationScoped facade is stateless and safe for horizontal scaling
 @ApplicationScoped
 public class DefaultBookingServiceFacade implements BookingServiceFacade, Serializable {
-
   private static final long serialVersionUID = 1L;
 
   @Inject private BookingService bookingService;

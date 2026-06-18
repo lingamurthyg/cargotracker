@@ -16,9 +16,9 @@ import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.RouteCandidate;
 
+// Container-ready: ApplicationScoped assembler is stateless and safe for horizontal scaling
 @ApplicationScoped
 public class ItineraryCandidateDtoAssembler {
-
   @Inject private LocationDtoAssembler locationDtoAssembler;
 
   public RouteCandidate toDto(Itinerary itinerary) {

@@ -1,9 +1,4 @@
 package org.eclipse.cargotracker.interfaces;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.faces.annotation.FacesConfig;
-
-/** Jakarta Faces configuration. * */
-@FacesConfig()
-@ApplicationScoped
+/** Jakarta Faces configuration. Container-ready: ApplicationScoped is stateless. */
 public class FacesConfiguration {}

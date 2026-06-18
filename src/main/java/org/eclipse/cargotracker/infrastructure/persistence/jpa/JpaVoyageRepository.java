@@ -9,9 +9,9 @@ import org.eclipse.cargotracker.domain.model.voyage.Voyage;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
 
+// Container-ready: ApplicationScoped repository is stateless and safe for horizontal scaling
 @ApplicationScoped
 public class JpaVoyageRepository implements VoyageRepository, Serializable {
-
   private static final long serialVersionUID = 1L;
 
   @PersistenceContext private EntityManager entityManager;

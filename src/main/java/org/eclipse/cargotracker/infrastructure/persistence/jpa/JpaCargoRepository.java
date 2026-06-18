@@ -16,9 +16,9 @@ import org.eclipse.cargotracker.domain.model.cargo.CargoRepository;
 import org.eclipse.cargotracker.domain.model.cargo.TrackingId;
 import org.eclipse.cargotracker.infrastructure.events.cdi.CargoUpdated;
 
+// Container-ready: ApplicationScoped repository is stateless and safe for horizontal scaling
 @ApplicationScoped
 public class JpaCargoRepository implements CargoRepository, Serializable {
-
   private static final long serialVersionUID = 1L;
 
   @Inject private Logger logger;

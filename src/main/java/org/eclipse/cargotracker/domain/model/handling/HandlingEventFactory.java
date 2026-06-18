@@ -14,9 +14,9 @@ import org.eclipse.cargotracker.domain.model.voyage.Voyage;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
 
+// Container-ready: ApplicationScoped is stateless and safe for horizontal scaling
 @ApplicationScoped
 public class HandlingEventFactory implements Serializable {
-
   private static final long serialVersionUID = 1L;
 
   @Inject private CargoRepository cargoRepository;

@@ -9,9 +9,9 @@ import org.eclipse.cargotracker.domain.model.location.Location;
 import org.eclipse.cargotracker.domain.model.location.LocationRepository;
 import org.eclipse.cargotracker.domain.model.location.UnLocode;
 
+// Container-ready: ApplicationScoped repository is stateless and safe for horizontal scaling
 @ApplicationScoped
 public class JpaLocationRepository implements LocationRepository, Serializable {
-
   private static final long serialVersionUID = 1L;
 
   @PersistenceContext private EntityManager entityManager;

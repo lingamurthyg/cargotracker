@@ -6,9 +6,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 
+// Container-ready: ApplicationScoped producer is stateless and safe for horizontal scaling
 @ApplicationScoped
 public class LoggerProducer implements Serializable {
-
   private static final long serialVersionUID = 1L;
 
   @Produces

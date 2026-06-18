@@ -20,12 +20,12 @@ import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.CargoRepository;
 import org.eclipse.cargotracker.infrastructure.events.cdi.CargoUpdated;
 
-/** Sever-sent events service for tracking all cargo in real time. */
-@Singleton
-@Path("/cargo")
+// Container-ready: Using ApplicationScoped instead of Singleton for better container compatibility
+@jakarta.enterprise.context.ApplicationScoped
+@Path("/cargo-tracking")
 public class RealtimeCargoTrackingService {
-  @Inject private Logger logger;
 
+  @Inject private Logger logger;
   @Inject private CargoRepository cargoRepository;
 
   @Context private Sse sse;

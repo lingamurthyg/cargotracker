@@ -12,13 +12,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.location.SampleLocations;
-import org.eclipse.cargotracker.domain.model.voyage.SampleVoyages;
-
-/** Loads sample data for demo. */
-@Singleton
-@Startup
-public class BookingServiceTestDataGenerator {
-
+// Container-ready: Using ApplicationScoped for test data generation - no mutable state stored
+@jakarta.enterprise.context.ApplicationScoped
   @Inject private Logger logger;
   @PersistenceContext private EntityManager entityManager;
 

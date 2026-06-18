@@ -1,0 +1,66 @@
+# Maven build artifacts
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven wrapper (use system maven)
+mvnw
+mvnw.cmd
+.mvn/
+
+# Gradle wrapper (use system gradle)
+gradlew
+gradlew.bat
+gradle/wrapper/
+
+# IDE files
+.idea/
+.vscode/
+.settings/
+.classpath
+.project
+*.iml
+*.iws
+*.ipr
+
+# Version control
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+README*
+LICENSE*
+docs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+test/
+**/test/
+*.test.*
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+
+# Database files
+*.db
+*.sqlite
+cargo-tracker-data/
+
+# Docker files
+Dockerfile*
+docker-compose*
+.dockerignore

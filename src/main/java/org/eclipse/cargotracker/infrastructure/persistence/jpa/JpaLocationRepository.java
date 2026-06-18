@@ -5,12 +5,12 @@ import java.util.List;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.eclipse.cargotracker.domain.model.location.Location;
-import org.eclipse.cargotracker.domain.model.location.LocationRepository;
-import org.eclipse.cargotracker.domain.model.location.UnLocode;
-
-@ApplicationScoped
-public class JpaLocationRepository implements LocationRepository, Serializable {
+/**
+ * JPA-based implementation of LocationRepository.
+ * 
+ * NOTE: @ApplicationScoped is a CDI scope for dependency injection, NOT for state storage.
+ * This repository uses JPA EntityManager for data access and does not maintain mutable state.
+ */
 
   private static final long serialVersionUID = 1L;
 

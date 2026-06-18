@@ -3,12 +3,12 @@ package org.eclipse.pathfinder.internal;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-import jakarta.enterprise.context.ApplicationScoped;
-
-@ApplicationScoped
-public class GraphDao implements Serializable {
+/**
+ * Data access object for graph traversal operations.
+ * 
+ * NOTE: @ApplicationScoped is a CDI scope for dependency injection, NOT for state storage.
+ * This DAO provides static location data and random voyage numbers, with no mutable shared state.
+ */
 
   private static final long serialVersionUID = 1L;
 

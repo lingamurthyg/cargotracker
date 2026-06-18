@@ -24,13 +24,13 @@ import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEventFactory;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEventRepository;
 import org.eclipse.cargotracker.domain.model.handling.HandlingHistory;
-import org.eclipse.cargotracker.domain.model.location.SampleLocations;
-import org.eclipse.cargotracker.domain.model.voyage.SampleVoyages;
-
-/** Loads sample data for demo. */
-@Singleton
-@Startup
-public class SampleDataGenerator {
+/** 
+ * Loads sample data for demo.
+ * 
+ * NOTE: @Singleton here is used for lifecycle management (startup initialization), NOT for state storage.
+ * This class does not maintain mutable state across requests. All data is persisted to the database via
+ * EntityManager, which is container-managed and safe for horizontal scaling.
+ */
 
   @Inject private Logger logger;
 

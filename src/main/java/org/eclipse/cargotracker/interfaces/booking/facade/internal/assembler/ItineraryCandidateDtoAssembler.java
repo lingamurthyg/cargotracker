@@ -12,12 +12,12 @@ import org.eclipse.cargotracker.domain.model.location.Location;
 import org.eclipse.cargotracker.domain.model.location.LocationRepository;
 import org.eclipse.cargotracker.domain.model.location.UnLocode;
 import org.eclipse.cargotracker.domain.model.voyage.Voyage;
-import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
-import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
-import org.eclipse.cargotracker.interfaces.booking.facade.dto.RouteCandidate;
-
-@ApplicationScoped
-public class ItineraryCandidateDtoAssembler {
+/**
+ * Assembler for converting Itinerary domain objects to RouteCandidate DTOs and vice versa.
+ * 
+ * NOTE: @ApplicationScoped is a CDI scope for dependency injection, NOT for state storage.
+ * This assembler is stateless and performs data transformation only.
+ */
 
   @Inject private LocationDtoAssembler locationDtoAssembler;
 

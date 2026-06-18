@@ -10,12 +10,12 @@ import org.eclipse.cargotracker.domain.model.cargo.TrackingId;
 import org.eclipse.cargotracker.domain.model.location.Location;
 import org.eclipse.cargotracker.domain.model.location.LocationRepository;
 import org.eclipse.cargotracker.domain.model.location.UnLocode;
-import org.eclipse.cargotracker.domain.model.voyage.Voyage;
-import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
-import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
-
-@ApplicationScoped
-public class HandlingEventFactory implements Serializable {
+/**
+ * Factory for creating HandlingEvent instances.
+ * 
+ * NOTE: @ApplicationScoped is a CDI scope for dependency injection, NOT for state storage.
+ * This factory is stateless and delegates to repositories for data access, making it safe for horizontal scaling.
+ */
 
   private static final long serialVersionUID = 1L;
 

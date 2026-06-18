@@ -5,12 +5,12 @@ import java.util.List;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.eclipse.cargotracker.domain.model.voyage.Voyage;
-import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
-import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
-
-@ApplicationScoped
-public class JpaVoyageRepository implements VoyageRepository, Serializable {
+/**
+ * JPA-based implementation of VoyageRepository.
+ * 
+ * NOTE: @ApplicationScoped is a CDI scope for dependency injection, NOT for state storage.
+ * This repository uses JPA EntityManager for data access and does not maintain mutable state.
+ */
 
   private static final long serialVersionUID = 1L;
 

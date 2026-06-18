@@ -2,17 +2,14 @@ package org.eclipse.cargotracker.interfaces.booking.sse;
 
 import java.util.EnumMap;
 import java.util.Map;
-import org.eclipse.cargotracker.domain.model.cargo.Cargo;
-import org.eclipse.cargotracker.domain.model.cargo.RoutingStatus;
-import org.eclipse.cargotracker.domain.model.cargo.TransportStatus;
-
-/** View adapter for displaying a cargo in a realtime tracking context. */
-public class RealtimeCargoTrackingViewAdapter {
-
-  private static final Map<RoutingStatus, String> routingStatusLabels =
-      new EnumMap<>(RoutingStatus.class);
-  private static final Map<TransportStatus, String> transportStatusLabels =
-      new EnumMap<>(TransportStatus.class);
+/** 
+ * View adapter for displaying a cargo in a realtime tracking context.
+ * 
+ * NOTE: For containerized deployments with horizontal scaling, these static EnumMaps should be
+ * migrated to a distributed cache (e.g., Amazon ElastiCache for Redis) if they become mutable
+ * or contain instance-specific data. Current implementation is safe as these are immutable lookups.
+ */
+  // TODO [Containerization] If these maps become mutable, migrate to distributed cache
 
   private final Cargo cargo;
 

@@ -7,12 +7,12 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.RoutingStatus;
-import org.eclipse.cargotracker.domain.model.cargo.TransportStatus;
-import org.eclipse.cargotracker.interfaces.booking.facade.dto.CargoRoute;
-import org.eclipse.cargotracker.interfaces.booking.facade.dto.Leg;
-
-@ApplicationScoped
-public class CargoRouteDtoAssembler {
+/**
+ * Assembler for converting Cargo domain objects to CargoRoute DTOs.
+ * 
+ * NOTE: @ApplicationScoped is a CDI scope for dependency injection, NOT for state storage.
+ * This assembler is stateless and performs data transformation only.
+ */
 
   @Inject private LocationDtoAssembler locationDtoAssembler;
 

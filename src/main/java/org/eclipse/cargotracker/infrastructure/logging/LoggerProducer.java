@@ -2,12 +2,12 @@ package org.eclipse.cargotracker.infrastructure.logging;
 
 import java.io.Serializable;
 import java.util.logging.Logger;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.inject.Produces;
-import jakarta.enterprise.inject.spi.InjectionPoint;
-
-@ApplicationScoped
-public class LoggerProducer implements Serializable {
+/**
+ * CDI producer for Logger instances.
+ * 
+ * NOTE: @ApplicationScoped is a CDI scope for dependency injection, NOT for state storage.
+ * This producer creates Logger instances based on injection points and does not maintain mutable state.
+ */
 
   private static final long serialVersionUID = 1L;
 

@@ -1,0 +1,60 @@
+{
+  "family": "cargo-tracker-task",
+  "requiresCompatibilities": ["FARGATE"],
+  "networkMode": "awsvpc",
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::{{ACCOUNT_ID}}:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::{{ACCOUNT_ID}}:role/ecsTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "cargo-tracker",
+      "image": "{{IMAGE_URI}}",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "JAVA_OPTS",
+          "value": "-Xmx512m -Xms256m -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
+        },
+        {
+          "name": "DB_DRIVER_CLASS",
+          "value": "org.h2.jdbcx.JdbcDataSource"
+        },
+        {
+          "name": "DB_JDBC_URL",
+          "value": "jdbc:h2:file:/app/data/cargo-tracker-database"
+        },
+        {
+          "name": "DB_USER",
+          "value": ""
+        },
+        {
+          "name": "DB_PASSWORD",
+          "value": ""
+        },
+        {
+          "name": "GRAPH_TRAVERSAL_URL",
+          "value": "http://localhost:8080/cargo-tracker/rest/graph-traversal/shortest-path"
+        },
+        {
+          "name": "TZ",
+          "value": "UTC"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/cargo-tracker",
+          "awslogs-region": "{{AWS_REGION}}",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

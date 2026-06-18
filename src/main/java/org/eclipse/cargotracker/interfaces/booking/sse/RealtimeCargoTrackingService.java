@@ -15,13 +15,13 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.sse.OutboundSseEvent;
 import jakarta.ws.rs.sse.Sse;
 import jakarta.ws.rs.sse.SseBroadcaster;
-import jakarta.ws.rs.sse.SseEventSink;
-import org.eclipse.cargotracker.domain.model.cargo.Cargo;
-import org.eclipse.cargotracker.domain.model.cargo.CargoRepository;
-import org.eclipse.cargotracker.infrastructure.events.cdi.CargoUpdated;
-
-/** Sever-sent events service for tracking all cargo in real time. */
-@Singleton
+/** 
+ * Server-sent events service for tracking all cargo in real time.
+ * 
+ * NOTE: @Singleton here is used for managing SSE broadcaster lifecycle, NOT for state storage.
+ * The broadcaster manages client connections but does not store application state. All cargo data
+ * is retrieved from the repository.
+ */
 @Path("/cargo")
 public class RealtimeCargoTrackingService {
   @Inject private Logger logger;

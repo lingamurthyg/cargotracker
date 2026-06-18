@@ -10,12 +10,12 @@ import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.Delivery;
 import org.eclipse.cargotracker.domain.model.cargo.HandlingActivity;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
-import org.eclipse.cargotracker.interfaces.booking.facade.dto.CargoStatus;
-import org.eclipse.cargotracker.interfaces.booking.facade.dto.TrackingEvents;
-
-@ApplicationScoped
-public class CargoStatusDtoAssembler {
-
+/**
+ * Assembler for converting Cargo domain objects to CargoStatus DTOs.
+ * 
+ * NOTE: @ApplicationScoped is a CDI scope for dependency injection, NOT for state storage.
+ * This assembler is stateless and performs data transformation only.
+ */
   @Inject private TrackingEventsDtoAssembler assembler;
 
   public CargoStatus toDto(Cargo cargo, List<HandlingEvent> handlingEvents) {

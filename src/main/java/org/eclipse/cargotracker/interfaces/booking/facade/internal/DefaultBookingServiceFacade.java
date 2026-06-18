@@ -24,12 +24,12 @@ import org.eclipse.cargotracker.interfaces.booking.facade.dto.CargoStatus;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.RouteCandidate;
 import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.CargoRouteDtoAssembler;
 import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.CargoStatusDtoAssembler;
-import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.ItineraryCandidateDtoAssembler;
-import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.LocationDtoAssembler;
-
-@ApplicationScoped
-public class DefaultBookingServiceFacade implements BookingServiceFacade, Serializable {
-
+/**
+ * Default implementation of BookingServiceFacade.
+ * 
+ * NOTE: @ApplicationScoped is a CDI scope for dependency injection, NOT for state storage.
+ * This facade is stateless and delegates to services and repositories for data access.
+ */
   private static final long serialVersionUID = 1L;
 
   @Inject private BookingService bookingService;

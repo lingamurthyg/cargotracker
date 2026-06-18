@@ -4,12 +4,12 @@ import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.cargotracker.application.util.DateConverter;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
-import org.eclipse.cargotracker.domain.model.voyage.Voyage;
-import org.eclipse.cargotracker.interfaces.booking.facade.dto.TrackingEvents;
-
-@ApplicationScoped
-public class TrackingEventsDtoAssembler {
-
+/**
+ * Assembler for converting HandlingEvent domain objects to TrackingEvents DTOs.
+ * 
+ * NOTE: @ApplicationScoped is a CDI scope for dependency injection, NOT for state storage.
+ * This assembler is stateless and performs data transformation only.
+ */
   public TrackingEvents toDto(Cargo cargo, HandlingEvent handlingEvent) {
     String location = locationFrom(handlingEvent);
     HandlingEvent.Type type = handlingEvent.getType();

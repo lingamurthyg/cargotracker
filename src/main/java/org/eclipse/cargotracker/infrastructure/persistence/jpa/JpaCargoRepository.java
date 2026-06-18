@@ -12,12 +12,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
-import org.eclipse.cargotracker.domain.model.cargo.CargoRepository;
-import org.eclipse.cargotracker.domain.model.cargo.TrackingId;
-import org.eclipse.cargotracker.infrastructure.events.cdi.CargoUpdated;
-
-@ApplicationScoped
-public class JpaCargoRepository implements CargoRepository, Serializable {
+/**
+ * JPA-based implementation of CargoRepository.
+ * 
+ * NOTE: @ApplicationScoped is a CDI scope for dependency injection, NOT for state storage.
+ * This repository uses JPA EntityManager for data access and does not maintain mutable state.
+ */
 
   private static final long serialVersionUID = 1L;
 

@@ -9,12 +9,12 @@ import jakarta.inject.Inject;
 import jakarta.jms.Destination;
 import jakarta.jms.JMSContext;
 import org.eclipse.cargotracker.application.ApplicationEvents;
-import org.eclipse.cargotracker.domain.model.cargo.Cargo;
-import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
-import org.eclipse.cargotracker.interfaces.handling.HandlingEventRegistrationAttempt;
-
-@ApplicationScoped
-public class JmsApplicationEvents implements ApplicationEvents, Serializable {
+/**
+ * JMS-based implementation of ApplicationEvents.
+ * 
+ * NOTE: @ApplicationScoped is a CDI scope for dependency injection, NOT for state storage.
+ * This class uses JMS for messaging and does not maintain mutable application state.
+ */
 
   private static final long serialVersionUID = 1L;
   private static final int LOW_PRIORITY = 0;

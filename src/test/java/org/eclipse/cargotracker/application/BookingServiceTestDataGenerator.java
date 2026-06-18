@@ -11,13 +11,13 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
-import org.eclipse.cargotracker.domain.model.location.SampleLocations;
-import org.eclipse.cargotracker.domain.model.voyage.SampleVoyages;
-
-/** Loads sample data for demo. */
-@Singleton
-@Startup
-public class BookingServiceTestDataGenerator {
+/** 
+ * Loads sample data for testing.
+ * 
+ * NOTE: @Singleton here is used for lifecycle management (startup initialization), NOT for state storage.
+ * This class does not maintain mutable state across requests. All data is persisted to the database via
+ * EntityManager, which is container-managed and safe for horizontal scaling.
+ */
 
   @Inject private Logger logger;
   @PersistenceContext private EntityManager entityManager;

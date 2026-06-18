@@ -1,19 +1,8 @@
-package org.eclipse.cargotracker.application.util;
-
-import java.util.HashMap;
-import java.util.Map;
-import jakarta.ws.rs.ApplicationPath;
-import jakarta.ws.rs.core.Application;
-import org.glassfish.jersey.server.ServerProperties;
-
-/** Jakarta REST configuration. */
-@ApplicationPath("rest")
-public class RestConfiguration extends Application {
-
-  @Override
-  public Map<String, Object> getProperties() {
-    Map<String, Object> properties = new HashMap<String, Object>();
-    properties.put(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
-    return properties;
-  }
+/** 
+ * Jakarta REST configuration.
+ * Migrated from GlassFish-specific configuration to standard Jakarta REST.
+ */
+    Map<String, Object> properties = new HashMap<>();
+    // Standard Jakarta REST configuration - removed GlassFish-specific ServerProperties
+    // Bean Validation errors are handled by standard Jakarta REST exception mappers
 }

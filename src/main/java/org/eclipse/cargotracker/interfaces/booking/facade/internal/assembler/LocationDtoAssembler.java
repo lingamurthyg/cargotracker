@@ -3,12 +3,12 @@ package org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import jakarta.enterprise.context.ApplicationScoped;
-import org.eclipse.cargotracker.domain.model.location.Location;
-
-@ApplicationScoped
-public class LocationDtoAssembler {
-
+/**
+ * Assembler for converting Location domain objects to Location DTOs.
+ * 
+ * NOTE: @ApplicationScoped is a CDI scope for dependency injection, NOT for state storage.
+ * This assembler is stateless and performs data transformation only.
+ */
   public org.eclipse.cargotracker.interfaces.booking.facade.dto.Location toDto(Location location) {
     return new org.eclipse.cargotracker.interfaces.booking.facade.dto.Location(
         location.getUnLocode().getIdString(), location.getName());

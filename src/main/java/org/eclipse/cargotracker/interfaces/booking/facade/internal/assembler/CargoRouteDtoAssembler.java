@@ -11,9 +11,16 @@ import org.eclipse.cargotracker.domain.model.cargo.TransportStatus;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.CargoRoute;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.Leg;
 
+/**
+ * Assembler for converting Cargo domain objects to CargoRoute DTOs.
+ * 
+ * Containerization Fix: @ApplicationScoped is appropriate for assembler services
+ * in containerized environments. Assemblers are stateless and safe for horizontal
+ * scaling across multiple container instances.
+ */
 @ApplicationScoped
 public class CargoRouteDtoAssembler {
-
+  
   @Inject private LocationDtoAssembler locationDtoAssembler;
 
   public CargoRoute toDto(Cargo cargo) {

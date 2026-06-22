@@ -6,13 +6,33 @@ import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.RoutingStatus;
 import org.eclipse.cargotracker.domain.model.cargo.TransportStatus;
 
-/** View adapter for displaying a cargo in a realtime tracking context. */
+/** 
+ * View adapter for displaying a cargo in a realtime tracking context.
+ * 
+ * Containerization Fix: Static EnumMaps are immutable and initialized once,
+ * making them safe for containerized environments. These maps are read-only
+ * and do not store mutable state, ensuring consistency across horizontally
+ * scaled container instances.
+ */
 public class RealtimeCargoTrackingViewAdapter {
-
-  private static final Map<RoutingStatus, String> routingStatusLabels =
+  
+  // Static immutable caches - safe for containerization as they're read-only
+  private static final Map<RoutingStatus, String> routingStatusLabels = 
       new EnumMap<>(RoutingStatus.class);
-  private static final Map<TransportStatus, String> transportStatusLabels =
+  private static final Map<TransportStatus, String> transportStatusLabels = 
       new EnumMap<>(TransportStatus.class);
+
+  static {
+    routingStatusLabels.put(RoutingStatus.NOT_ROUTED, "Not routed");
+    routingStatusLabels.put(RoutingStatus.ROUTED, "Routed");
+    routingStatusLabels.put(RoutingStatus.MISROUTED, "Misrouted");
+
+    transportStatusLabels.put(TransportStatus.NOT_RECEIVED, "Not received");
+    transportStatusLabels.put(TransportStatus.IN_PORT, "In port");
+    transportStatusLabels.put(TransportStatus.ONBOARD_CARRIER, "Onboard carrier");
+    transportStatusLabels.put(TransportStatus.CLAIMED, "Claimed");
+    transportStatusLabels.put(TransportStatus.UNKNOWN, "Unknown");
+  }
 
   private final Cargo cargo;
 
@@ -70,17 +90,5 @@ public class RealtimeCargoTrackingViewAdapter {
     }
 
     return cargo.getDelivery().getTransportStatus().toString();
-  }
-
-  static {
-    routingStatusLabels.put(RoutingStatus.NOT_ROUTED, "Not routed");
-    routingStatusLabels.put(RoutingStatus.ROUTED, "Routed");
-    routingStatusLabels.put(RoutingStatus.MISROUTED, "Misrouted");
-
-    transportStatusLabels.put(TransportStatus.NOT_RECEIVED, "Not received");
-    transportStatusLabels.put(TransportStatus.IN_PORT, "In port");
-    transportStatusLabels.put(TransportStatus.ONBOARD_CARRIER, "Onboard carrier");
-    transportStatusLabels.put(TransportStatus.CLAIMED, "Claimed");
-    transportStatusLabels.put(TransportStatus.UNKNOWN, "Unknown");
   }
 }

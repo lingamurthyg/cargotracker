@@ -1,0 +1,85 @@
+# Docker ignore file for Java Jakarta EE application
+# Excludes unnecessary files from Docker build context
+
+# Maven build artifacts
+target/
+!target/cargo-tracker.war
+
+# Maven wrapper (use system maven instead)
+.mvn/
+mvnw
+mvnw.cmd
+
+# Gradle wrapper (if present)
+gradle/wrapper/
+gradlew
+gradlew.bat
+.gradle/
+
+# IDE files
+.idea/
+.vscode/
+.settings/
+.classpath
+.project
+*.iml
+*.iws
+*.ipr
+.factorypath
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+!README.md
+docs/
+*.txt
+!pom.xml
+
+# Test files
+src/test/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+Jenkinsfile
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Database files (H2)
+*.db
+*.trace.db
+cargo-tracker-data/
+
+# Application server specific
+glassfish/
+payara/
+wildfly/
+
+# Docker files (don't include in build context)
+docker-compose*.yml
+*.dockerfile
+
+# Other
+.env
+.env.local
+*.bak
+*.orig

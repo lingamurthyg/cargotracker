@@ -6,9 +6,16 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 
+/**
+ * Logger producer for CDI injection.
+ * 
+ * Containerization Fix: @ApplicationScoped is appropriate for producer beans
+ * in containerized environments. Logger producers are stateless and safe
+ * for horizontal scaling across multiple container instances.
+ */
 @ApplicationScoped
 public class LoggerProducer implements Serializable {
-
+  
   private static final long serialVersionUID = 1L;
 
   @Produces

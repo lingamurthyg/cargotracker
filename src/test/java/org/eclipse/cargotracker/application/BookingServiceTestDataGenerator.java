@@ -1,25 +1,15 @@
 package org.eclipse.cargotracker.application;
 
-import java.util.List;
-import java.util.logging.Logger;
-import jakarta.annotation.PostConstruct;
-import jakarta.ejb.Singleton;
-import jakarta.ejb.Startup;
-import jakarta.ejb.TransactionAttribute;
-import jakarta.ejb.TransactionAttributeType;
-import jakarta.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.location.SampleLocations;
-import org.eclipse.cargotracker.domain.model.voyage.SampleVoyages;
-
-/** Loads sample data for demo. */
-@Singleton
-@Startup
-public class BookingServiceTestDataGenerator {
-
-  @Inject private Logger logger;
+// Containerization Fix: Replaced @Singleton EJB with @ApplicationScoped CDI
+// to ensure compatibility with horizontally scaled container instances.
+// For production distributed environments, consider using a distributed
+// coordination service (e.g., Redis with Redisson) to ensure data is loaded only once.
+@ApplicationScoped
   @PersistenceContext private EntityManager entityManager;
 
   @PostConstruct

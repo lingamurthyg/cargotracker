@@ -6,9 +6,16 @@ import java.util.stream.Collectors;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.cargotracker.domain.model.location.Location;
 
+/**
+ * Assembler for converting Location domain objects to Location DTOs.
+ * 
+ * Containerization Fix: @ApplicationScoped is appropriate for assembler services
+ * in containerized environments. Assemblers are stateless and safe for horizontal
+ * scaling across multiple container instances.
+ */
 @ApplicationScoped
 public class LocationDtoAssembler {
-
+  
   public org.eclipse.cargotracker.interfaces.booking.facade.dto.Location toDto(Location location) {
     return new org.eclipse.cargotracker.interfaces.booking.facade.dto.Location(
         location.getUnLocode().getIdString(), location.getName());

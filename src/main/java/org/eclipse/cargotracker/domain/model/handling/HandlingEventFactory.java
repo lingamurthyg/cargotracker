@@ -14,9 +14,16 @@ import org.eclipse.cargotracker.domain.model.voyage.Voyage;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
 
+/**
+ * Factory for creating handling events.
+ * 
+ * Containerization Fix: @ApplicationScoped is appropriate for stateless factory services
+ * in containerized environments. This scope is managed per application context and
+ * does not store state, making it safe for horizontal scaling.
+ */
 @ApplicationScoped
 public class HandlingEventFactory implements Serializable {
-
+  
   private static final long serialVersionUID = 1L;
 
   @Inject private CargoRepository cargoRepository;

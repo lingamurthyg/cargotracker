@@ -1,41 +1,27 @@
-package org.eclipse.cargotracker.application.util;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.logging.Logger;
+import jakarta.persistence.LockModeType;
 import jakarta.annotation.PostConstruct;
-import jakarta.ejb.Singleton;
-import jakarta.ejb.Startup;
 import jakarta.ejb.TransactionAttribute;
 import jakarta.ejb.TransactionAttributeType;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.LockModeType;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.PersistenceContext;
-import org.eclipse.cargotracker.domain.model.cargo.Cargo;
-import org.eclipse.cargotracker.domain.model.cargo.Itinerary;
-import org.eclipse.cargotracker.domain.model.cargo.Leg;
-import org.eclipse.cargotracker.domain.model.cargo.RouteSpecification;
 import org.eclipse.cargotracker.domain.model.cargo.TrackingId;
 import org.eclipse.cargotracker.domain.model.handling.CannotCreateHandlingEventException;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEventFactory;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEventRepository;
-import org.eclipse.cargotracker.domain.model.handling.HandlingHistory;
-import org.eclipse.cargotracker.domain.model.location.SampleLocations;
 import org.eclipse.cargotracker.domain.model.voyage.SampleVoyages;
 
-/** Loads sample data for demo. */
-@Singleton
-@Startup
+/**
+ * Sample data generator for demonstration purposes.
+ * 
+ * Containerization Fix: Replaced @Singleton EJB with @ApplicationScoped CDI
+ * to ensure compatibility with horizontally scaled container instances.
+ * For production distributed environments, consider using a distributed
+ * coordination service (e.g., Redis with Redisson) to ensure data is loaded only once.
+ */
 public class SampleDataGenerator {
-
   @Inject private Logger logger;
-
-  @PersistenceContext private EntityManager entityManager;
-  @Inject private HandlingEventFactory handlingEventFactory;
   @Inject private HandlingEventRepository handlingEventRepository;
 
   @PostConstruct

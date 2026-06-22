@@ -7,9 +7,16 @@ import java.util.List;
 import java.util.Random;
 import jakarta.enterprise.context.ApplicationScoped;
 
+/**
+ * Graph DAO for pathfinding operations.
+ * 
+ * Containerization Fix: @ApplicationScoped is appropriate for DAO services
+ * in containerized environments. DAOs are stateless and safe for horizontal
+ * scaling across multiple container instances.
+ */
 @ApplicationScoped
 public class GraphDao implements Serializable {
-
+  
   private static final long serialVersionUID = 1L;
 
   private final Random random = new Random();

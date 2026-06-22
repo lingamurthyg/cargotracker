@@ -23,18 +23,15 @@ import org.eclipse.cargotracker.interfaces.booking.facade.dto.CargoRoute;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.CargoStatus;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.RouteCandidate;
 import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.CargoRouteDtoAssembler;
-import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.CargoStatusDtoAssembler;
 import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.ItineraryCandidateDtoAssembler;
 import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.LocationDtoAssembler;
 
-@ApplicationScoped
+/**
+ * Default implementation of BookingServiceFacade.
+ * 
+ */
 public class DefaultBookingServiceFacade implements BookingServiceFacade, Serializable {
-
-  private static final long serialVersionUID = 1L;
-
-  @Inject private BookingService bookingService;
-  @Inject private LocationRepository locationRepository;
-  @Inject private CargoRepository cargoRepository;
+  
   @Inject private VoyageRepository voyageRepository;
   @Inject private HandlingEventRepository handlingEventRepository;
   @Inject private CargoRouteDtoAssembler cargoRouteDtoAssembler;

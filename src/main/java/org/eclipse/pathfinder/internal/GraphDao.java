@@ -7,6 +7,13 @@ import java.util.List;
 import java.util.Random;
 import jakarta.enterprise.context.ApplicationScoped;
 
+/**
+ * Data access object for graph traversal operations.
+ * 
+ * Note: @ApplicationScoped is appropriate for containerized environments
+ * This DAO is stateless (Random instance is for demo purposes only)
+ * Safe for horizontal scaling across multiple container instances
+ */
 @ApplicationScoped
 public class GraphDao implements Serializable {
 

@@ -7,6 +7,13 @@ import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.domain.model.voyage.Voyage;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.TrackingEvents;
 
+/**
+ * Assembler for converting HandlingEvent domain objects to TrackingEvents DTOs.
+ * 
+ * Note: @ApplicationScoped is appropriate for containerized environments
+ * This assembler is stateless and performs DTO transformations
+ * Safe for horizontal scaling across multiple container instances
+ */
 @ApplicationScoped
 public class TrackingEventsDtoAssembler {
 

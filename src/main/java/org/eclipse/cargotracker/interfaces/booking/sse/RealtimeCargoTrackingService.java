@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.ejb.Singleton;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.ObservesAsync;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
@@ -20,12 +21,17 @@ import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.CargoRepository;
 import org.eclipse.cargotracker.infrastructure.events.cdi.CargoUpdated;
 
-/** Sever-sent events service for tracking all cargo in real time. */
-@Singleton
-@Path("/cargo")
+/**
+ * Realtime cargo tracking service using Server-Sent Events (SSE).
+ * 
+ * Note: Changed from @Singleton to @ApplicationScoped for better container scalability
+ * SSE broadcaster is managed per instance, suitable for horizontal scaling
+ */
+@Path("/tracking")
+@ApplicationScoped
 public class RealtimeCargoTrackingService {
-  @Inject private Logger logger;
 
+  @Inject private Logger logger;
   @Inject private CargoRepository cargoRepository;
 
   @Context private Sse sse;

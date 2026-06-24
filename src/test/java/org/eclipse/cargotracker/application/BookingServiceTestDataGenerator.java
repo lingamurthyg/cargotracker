@@ -7,6 +7,7 @@ import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
 import jakarta.ejb.TransactionAttribute;
 import jakarta.ejb.TransactionAttributeType;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -14,9 +15,13 @@ import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.location.SampleLocations;
 import org.eclipse.cargotracker.domain.model.voyage.SampleVoyages;
 
-/** Loads sample data for demo. */
-@Singleton
-@Startup
+/**
+ * Generates sample data for testing purposes.
+ * 
+ * Note: Changed from @Singleton to @ApplicationScoped for better container scalability
+ * This class is stateless and safe for horizontal scaling
+ */
+@ApplicationScoped
 public class BookingServiceTestDataGenerator {
 
   @Inject private Logger logger;

@@ -16,6 +16,13 @@ import org.eclipse.cargotracker.domain.model.cargo.CargoRepository;
 import org.eclipse.cargotracker.domain.model.cargo.TrackingId;
 import org.eclipse.cargotracker.infrastructure.events.cdi.CargoUpdated;
 
+/**
+ * JPA implementation of CargoRepository.
+ * 
+ * Note: @ApplicationScoped is appropriate for containerized environments
+ * This repository is stateless and delegates to JPA EntityManager
+ * Safe for horizontal scaling across multiple container instances
+ */
 @ApplicationScoped
 public class JpaCargoRepository implements CargoRepository, Serializable {
 

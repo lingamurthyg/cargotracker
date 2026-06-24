@@ -27,6 +27,13 @@ import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.Car
 import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.ItineraryCandidateDtoAssembler;
 import org.eclipse.cargotracker.interfaces.booking.facade.internal.assembler.LocationDtoAssembler;
 
+/**
+ * Default implementation of BookingServiceFacade.
+ * 
+ * Note: @ApplicationScoped is appropriate for containerized environments
+ * This facade is stateless and delegates to injected services and repositories
+ * Safe for horizontal scaling across multiple container instances
+ */
 @ApplicationScoped
 public class DefaultBookingServiceFacade implements BookingServiceFacade, Serializable {
 

@@ -1,0 +1,85 @@
+# Docker ignore file for Java Jakarta EE project
+# Exclude build artifacts
+target/
+build/
+*.war
+*.jar
+*.ear
+
+# Exclude Maven wrapper files
+mvnw
+mvnw.cmd
+.mvn/
+
+# Exclude Gradle wrapper files
+gradlew
+gradlew.bat
+gradle/wrapper/
+
+# Exclude IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# Exclude version control
+.git/
+.gitignore
+.gitattributes
+
+# Exclude documentation
+*.md
+README*
+LICENSE*
+CONTRIBUTING*
+docs/
+
+# Exclude test files
+src/test/
+
+# Exclude CI/CD files
+.github/
+.gitlab-ci.yml
+.travis.yml
+Jenkinsfile
+
+# Exclude OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Exclude logs
+*.log
+logs/
+
+# Exclude temporary files
+tmp/
+temp/
+*.tmp
+
+# Exclude database files
+*.db
+*.h2.db
+cargo-tracker-data/
+
+# Exclude Docker files (don't copy into image)
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Exclude Kubernetes files
+kubernetes/
+k8s/
+*.yaml
+*.yml
+
+# Exclude scripts
+scripts/
+*.sh
+*.bat

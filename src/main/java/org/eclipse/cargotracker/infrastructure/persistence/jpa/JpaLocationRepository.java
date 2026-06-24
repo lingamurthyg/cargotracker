@@ -9,6 +9,13 @@ import org.eclipse.cargotracker.domain.model.location.Location;
 import org.eclipse.cargotracker.domain.model.location.LocationRepository;
 import org.eclipse.cargotracker.domain.model.location.UnLocode;
 
+/**
+ * JPA implementation of LocationRepository.
+ * 
+ * Note: @ApplicationScoped is appropriate for containerized environments
+ * This repository is stateless and delegates to JPA EntityManager
+ * Safe for horizontal scaling across multiple container instances
+ */
 @ApplicationScoped
 public class JpaLocationRepository implements LocationRepository, Serializable {
 

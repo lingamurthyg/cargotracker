@@ -13,11 +13,19 @@ import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.interfaces.handling.HandlingEventRegistrationAttempt;
 
+/**
+ * JMS implementation of ApplicationEvents.
+ * 
+ * Note: @ApplicationScoped is appropriate for containerized environments
+ * This service is stateless and uses injected JMS context for messaging
+ * Safe for horizontal scaling across multiple container instances
+ */
 @ApplicationScoped
 public class JmsApplicationEvents implements ApplicationEvents, Serializable {
 
   private static final long serialVersionUID = 1L;
   private static final int LOW_PRIORITY = 0;
+  
   @Inject JMSContext jmsContext;
 
   @Resource(lookup = "java:app/jms/CargoHandledQueue")

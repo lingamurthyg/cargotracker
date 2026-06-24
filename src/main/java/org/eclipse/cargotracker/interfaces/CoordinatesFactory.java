@@ -22,8 +22,11 @@ import org.eclipse.cargotracker.domain.model.location.Location;
 import org.eclipse.cargotracker.domain.model.location.UnLocode;
 
 /**
- * At the moment, coordinates are produced by a simple factory. It may be converted to a repository
- * if coordinates become a domain layer concern.
+ * Factory for creating and retrieving coordinates for locations.
+ * 
+ * Note: This class uses an immutable static map for coordinate lookups. This is safe for 
+ * containerized environments as the data is read-only and initialized once at class loading.
+ * For dynamic coordinate data, consider using a distributed cache like Redis.
  */
 public class CoordinatesFactory {
 

@@ -16,6 +16,13 @@ import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.RouteCandidate;
 
+/**
+ * Assembler for converting Itinerary domain objects to RouteCandidate DTOs.
+ * 
+ * Note: @ApplicationScoped is appropriate for containerized environments
+ * This assembler is stateless and performs DTO transformations
+ * Safe for horizontal scaling across multiple container instances
+ */
 @ApplicationScoped
 public class ItineraryCandidateDtoAssembler {
 

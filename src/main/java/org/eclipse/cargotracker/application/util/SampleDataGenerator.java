@@ -27,16 +27,20 @@ import org.eclipse.cargotracker.domain.model.handling.HandlingHistory;
 import org.eclipse.cargotracker.domain.model.location.SampleLocations;
 import org.eclipse.cargotracker.domain.model.voyage.SampleVoyages;
 
-/** Loads sample data for demo. */
+/**
+ * Generates sample data for the application.
+ * 
+ * Note: @Singleton with @Startup ensures data is loaded once at application startup
+ * This is appropriate for initialization tasks in containerized environments
+ */
 @Singleton
 @Startup
 public class SampleDataGenerator {
 
   @Inject private Logger logger;
-
-  @PersistenceContext private EntityManager entityManager;
   @Inject private HandlingEventFactory handlingEventFactory;
   @Inject private HandlingEventRepository handlingEventRepository;
+  @PersistenceContext private EntityManager entityManager;
 
   @PostConstruct
   @TransactionAttribute(TransactionAttributeType.REQUIRED)

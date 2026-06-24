@@ -6,6 +6,13 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 
+/**
+ * Producer for Logger instances.
+ * 
+ * Note: @ApplicationScoped is appropriate for containerized environments
+ * This producer is stateless and creates logger instances per injection point
+ * Safe for horizontal scaling across multiple container instances
+ */
 @ApplicationScoped
 public class LoggerProducer implements Serializable {
 

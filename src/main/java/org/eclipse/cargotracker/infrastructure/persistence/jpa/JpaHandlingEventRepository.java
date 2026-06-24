@@ -9,6 +9,13 @@ import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEventRepository;
 import org.eclipse.cargotracker.domain.model.handling.HandlingHistory;
 
+/**
+ * JPA implementation of HandlingEventRepository.
+ * 
+ * Note: @ApplicationScoped is appropriate for containerized environments
+ * This repository is stateless and delegates to JPA EntityManager
+ * Safe for horizontal scaling across multiple container instances
+ */
 @ApplicationScoped
 public class JpaHandlingEventRepository implements HandlingEventRepository, Serializable {
 

@@ -6,9 +6,15 @@ import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.RoutingStatus;
 import org.eclipse.cargotracker.domain.model.cargo.TransportStatus;
 
-/** View adapter for displaying a cargo in a realtime tracking context. */
+/** 
+ * View adapter for displaying a cargo in a realtime tracking context.
+ * 
+ * Note: This class uses immutable static EnumMaps for label lookups. This is safe for 
+ * containerized environments as the data is read-only and initialized once at class loading.
+ */
 public class RealtimeCargoTrackingViewAdapter {
 
+  // Immutable static maps - safe for horizontal scaling
   private static final Map<RoutingStatus, String> routingStatusLabels =
       new EnumMap<>(RoutingStatus.class);
   private static final Map<TransportStatus, String> transportStatusLabels =

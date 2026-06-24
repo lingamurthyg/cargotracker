@@ -9,6 +9,13 @@ import org.eclipse.cargotracker.domain.model.voyage.Voyage;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
 
+/**
+ * JPA implementation of VoyageRepository.
+ * 
+ * Note: @ApplicationScoped is appropriate for containerized environments
+ * This repository is stateless and delegates to JPA EntityManager
+ * Safe for horizontal scaling across multiple container instances
+ */
 @ApplicationScoped
 public class JpaVoyageRepository implements VoyageRepository, Serializable {
 

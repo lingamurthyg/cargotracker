@@ -6,6 +6,11 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 
+/**
+ * CDI producer for Logger instances.
+ * Note: This class is stateless and container-safe. It uses @ApplicationScoped but does not
+ * maintain any mutable state, making it suitable for horizontally scaled container deployments.
+ */
 @ApplicationScoped
 public class LoggerProducer implements Serializable {
 

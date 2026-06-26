@@ -22,8 +22,15 @@ import org.eclipse.cargotracker.domain.model.location.Location;
 import org.eclipse.cargotracker.domain.model.location.UnLocode;
 
 /**
- * At the moment, coordinates are produced by a simple factory. It may be converted to a repository
- * if coordinates become a domain layer concern.
+ * Coordinates factory using an immutable static map.
+ * 
+ * Note: This implementation uses a static immutable map for read-only reference data.
+ * For production deployments with horizontally scaled containers:
+ * - If coordinates data is static and read-only, this approach is acceptable
+ * - If coordinates data needs to be updated at runtime, consider migrating to:
+ *   * Amazon ElastiCache (Redis) for distributed caching
+ *   * Amazon DynamoDB or RDS for persistent storage
+ *   * AWS Systems Manager Parameter Store for configuration data
  */
 public class CoordinatesFactory {
 

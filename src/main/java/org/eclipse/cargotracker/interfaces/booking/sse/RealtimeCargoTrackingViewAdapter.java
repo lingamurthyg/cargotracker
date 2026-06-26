@@ -1,12 +1,8 @@
 package org.eclipse.cargotracker.interfaces.booking.sse;
 
-import java.util.EnumMap;
-import java.util.Map;
-import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.RoutingStatus;
 import org.eclipse.cargotracker.domain.model.cargo.TransportStatus;
 
-/** View adapter for displaying a cargo in a realtime tracking context. */
 public class RealtimeCargoTrackingViewAdapter {
 
   private static final Map<RoutingStatus, String> routingStatusLabels =
@@ -14,9 +10,6 @@ public class RealtimeCargoTrackingViewAdapter {
   private static final Map<TransportStatus, String> transportStatusLabels =
       new EnumMap<>(TransportStatus.class);
 
-  private final Cargo cargo;
-
-  public RealtimeCargoTrackingViewAdapter(Cargo cargo) {
     this.cargo = cargo;
   }
 

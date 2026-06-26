@@ -11,18 +11,12 @@ import org.eclipse.cargotracker.domain.model.cargo.Leg;
 import org.eclipse.cargotracker.domain.model.location.Location;
 import org.eclipse.cargotracker.domain.model.location.LocationRepository;
 import org.eclipse.cargotracker.domain.model.location.UnLocode;
-import org.eclipse.cargotracker.domain.model.voyage.Voyage;
-import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.RouteCandidate;
 
 @ApplicationScoped
 public class ItineraryCandidateDtoAssembler {
 
-  @Inject private LocationDtoAssembler locationDtoAssembler;
-
-  public RouteCandidate toDto(Itinerary itinerary) {
-    List<org.eclipse.cargotracker.interfaces.booking.facade.dto.Leg> legDTOs =
         itinerary.getLegs().stream().map(this::toLegDTO).collect(Collectors.toList());
     return new RouteCandidate(legDTOs);
   }

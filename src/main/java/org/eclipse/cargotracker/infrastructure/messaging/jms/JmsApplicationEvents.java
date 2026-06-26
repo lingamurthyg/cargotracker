@@ -7,18 +7,12 @@ import jakarta.annotation.Resource;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.jms.Destination;
-import jakarta.jms.JMSContext;
-import org.eclipse.cargotracker.application.ApplicationEvents;
-import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.interfaces.handling.HandlingEventRegistrationAttempt;
 
 @ApplicationScoped
 public class JmsApplicationEvents implements ApplicationEvents, Serializable {
 
-  private static final long serialVersionUID = 1L;
-  private static final int LOW_PRIORITY = 0;
-  @Inject JMSContext jmsContext;
 
   @Resource(lookup = "java:app/jms/CargoHandledQueue")
   private Destination cargoHandledQueue;

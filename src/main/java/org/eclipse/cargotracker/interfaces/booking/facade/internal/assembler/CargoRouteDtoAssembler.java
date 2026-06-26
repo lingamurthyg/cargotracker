@@ -6,18 +6,12 @@ import java.util.List;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
-import org.eclipse.cargotracker.domain.model.cargo.RoutingStatus;
-import org.eclipse.cargotracker.domain.model.cargo.TransportStatus;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.CargoRoute;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.Leg;
 
 @ApplicationScoped
 public class CargoRouteDtoAssembler {
 
-  @Inject private LocationDtoAssembler locationDtoAssembler;
-
-  public CargoRoute toDto(Cargo cargo) {
-    List<Leg> legs =
         cargo
             .getItinerary()
             .getLegs()

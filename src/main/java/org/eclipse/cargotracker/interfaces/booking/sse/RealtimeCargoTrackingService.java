@@ -14,19 +14,12 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.sse.OutboundSseEvent;
 import jakarta.ws.rs.sse.Sse;
-import jakarta.ws.rs.sse.SseBroadcaster;
-import jakarta.ws.rs.sse.SseEventSink;
-import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.CargoRepository;
 import org.eclipse.cargotracker.infrastructure.events.cdi.CargoUpdated;
 
-/** Sever-sent events service for tracking all cargo in real time. */
 @Singleton
 @Path("/cargo")
 public class RealtimeCargoTrackingService {
-  @Inject private Logger logger;
-
-  @Inject private CargoRepository cargoRepository;
 
   @Context private Sse sse;
   private SseBroadcaster broadcaster;

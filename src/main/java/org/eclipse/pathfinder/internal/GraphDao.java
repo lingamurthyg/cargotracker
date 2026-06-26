@@ -10,8 +10,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class GraphDao implements Serializable {
 
-  private static final long serialVersionUID = 1L;
-
   private final Random random = new Random();
 
   public List<String> listLocations() {

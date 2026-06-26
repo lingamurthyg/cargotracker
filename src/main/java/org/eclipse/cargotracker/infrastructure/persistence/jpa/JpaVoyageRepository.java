@@ -4,17 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import org.eclipse.cargotracker.domain.model.voyage.Voyage;
-import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
 
 @ApplicationScoped
 public class JpaVoyageRepository implements VoyageRepository, Serializable {
-
-  private static final long serialVersionUID = 1L;
-
-  @PersistenceContext private EntityManager entityManager;
 
   @Override
   public Voyage find(VoyageNumber voyageNumber) {

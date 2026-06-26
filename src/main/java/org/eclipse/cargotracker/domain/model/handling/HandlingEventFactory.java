@@ -9,18 +9,12 @@ import org.eclipse.cargotracker.domain.model.cargo.CargoRepository;
 import org.eclipse.cargotracker.domain.model.cargo.TrackingId;
 import org.eclipse.cargotracker.domain.model.location.Location;
 import org.eclipse.cargotracker.domain.model.location.LocationRepository;
-import org.eclipse.cargotracker.domain.model.location.UnLocode;
-import org.eclipse.cargotracker.domain.model.voyage.Voyage;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
 
 @ApplicationScoped
 public class HandlingEventFactory implements Serializable {
 
-  private static final long serialVersionUID = 1L;
-
-  @Inject private CargoRepository cargoRepository;
-  @Inject private VoyageRepository voyageRepository;
   @Inject private LocationRepository locationRepository;
 
   /**

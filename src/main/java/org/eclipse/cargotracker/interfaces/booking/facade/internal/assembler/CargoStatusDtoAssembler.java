@@ -8,18 +8,12 @@ import jakarta.inject.Inject;
 import org.eclipse.cargotracker.application.util.DateConverter;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.Delivery;
-import org.eclipse.cargotracker.domain.model.cargo.HandlingActivity;
-import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.CargoStatus;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.TrackingEvents;
 
 @ApplicationScoped
 public class CargoStatusDtoAssembler {
 
-  @Inject private TrackingEventsDtoAssembler assembler;
-
-  public CargoStatus toDto(Cargo cargo, List<HandlingEvent> handlingEvents) {
-    List<TrackingEvents> trackingEvents;
 
     trackingEvents =
         handlingEvents

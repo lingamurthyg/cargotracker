@@ -1,0 +1,47 @@
+# Dockerfile build context exclusions
+target/
+.git/
+.gitignore
+*.md
+README.md
+DEPLOYMENT.md
+
+# Maven wrapper files (use system mvn instead)
+mvnw
+mvnw.cmd
+.mvn/
+
+# Gradle wrapper files (use system gradle instead)
+gradlew
+gradlew.bat
+gradle/wrapper/
+
+# IDE files
+.idea/
+.vscode/
+.settings/
+.project
+.classpath
+*.iml
+*.iws
+*.ipr
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+src/test/
+
+# Documentation
+docs/
+
+# Kubernetes manifests
+kubernetes/
+
+# Scripts
+scripts/
+
+# Docker files
+docker-compose.yml
+.dockerignore

@@ -6,7 +6,12 @@ import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 import org.glassfish.jersey.server.ServerProperties;
 
-/** Jakarta REST configuration. */
+/**
+ * Jakarta REST configuration.
+ * Note: This configuration uses standard Jakarta EE APIs and is container-agnostic.
+ * For container-specific optimizations, use environment-specific configuration files
+ * or externalized properties rather than hardcoded server-specific imports.
+ */
 @ApplicationPath("rest")
 public class RestConfiguration extends Application {
 
